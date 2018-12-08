@@ -22,6 +22,7 @@ export default class Game extends React.Component {
           style={styles.actionbar}
           onChangeQuestion={this.props.onChangeQuestion}
           onSubmit={this.props.onSubmit}
+          currentQuestion={this.props.currentQuestion}
         />
       </View>
     )

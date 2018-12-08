@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   QUESTION_ANSWER, SUBMIT, INIT_QUESTIONS, CHANGE_QUESTION,
-  RESTART, RECEIVE_QUESTIONS, INVALIDATE_QUESTIONS
+  RESTART, RECEIVE_QUESTIONS, INVALIDATE_QUESTIONS, SET_INPUT
 } from './actions'
 
 import { questions as sampleQuestions } from '../assets/mock-data'

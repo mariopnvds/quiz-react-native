@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { View, LayoutAnimation, NativeModules, StyleSheet, Dimensions } from 'react-native';
+import { View, LayoutAnimation, NativeModules, StyleSheet } from 'react-native';
 
 import CircleButton from './CircleButton';
 import IconButton from './IconButton';
-import { layout } from '../assets/layout';
 
 const { UIManager } = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -23,18 +22,37 @@ let CustomAnimation = {
   }
 };
 
-const spacing = -55;
+let spacing = -55;
 
 export default class NiceButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressed: false
+      pressed: false,
+      direction: ''
     }
 
     this._onPress = this._onPress.bind(this);
+    this._setStyle = this._setStyle.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.direction) {
+      switch (this.props.direction) {
+        case 'up':
+          this.setState({ direction: 'up' });
+          break;
+        case 'down':
+          this.setState({ direction: 'down' });
+          break;
+        case 'right':
+          this.setState({ direction: 'right' });
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   _onPress() {
     // show/hide buttons nicely
@@ -59,7 +77,55 @@ export default class NiceButton extends React.Component {
     }
   }
 
+  _setStyle(i) {
+    switch (this.state.direction) {
+      case 'up':
+        return [
+          { top: this.state[i] }, 
+          styles.iconButton,
+          {
+            transform: [
+              { translateY: 0 },
+              { translateX: 10 }
+            ]
+          }]
+      case 'down':
+      spacing = spacing * (-1);
+        return [
+          { top: this.state[i] }, 
+          styles.iconButton,
+          {
+            transform: [
+              { translateY: 20 },
+              { translateX: 10 }
+            ]
+          }]
+      case 'right':
+      spacing = spacing * (-1);
+        return [
+          { left: this.state[i] }, 
+          styles.iconButton,
+          {
+            transform: [
+              { translateY: 10 },
+              { translateX: 20 }
+            ]
+          }]
+      default:
+        return [
+          { left: this.state[i] }, 
+          styles.iconButton,
+          {
+            transform: [
+              { translateY: 10 },
+              { translateX: 0 }
+            ]
+          }]
+    }
+  }
+
   render() {
+
     return (
       <View style={this.props.style}>
         {
@@ -67,7 +133,7 @@ export default class NiceButton extends React.Component {
           this.props.options.map((opt, i) => {
             return (<IconButton
               image={opt.image}
-              style={[{ left: this.state[i] }, styles.iconButton]}
+              style={this._setStyle(i)}
               onPress={opt.onPress}
               key={i} />)
           })
@@ -78,8 +144,6 @@ export default class NiceButton extends React.Component {
   }
 }
 
-let { height, width } = Dimensions.get('window');
-
 // gotta check out this damn thing
 const styles = StyleSheet.create({
   circleButton: {
@@ -89,10 +153,6 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     position: 'absolute',
-    transform: [
-      { translateY: 9 },
-      { translateX: 0 }
-    ],
     zIndex: 99
   }
 });

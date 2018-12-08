@@ -1,11 +1,14 @@
+// GLOBAL VALUES
 const colors = {
   dark: '#15161C',
-  primary: '#0A59F8',
+  transparentDark: 'rgba(21, 22, 28, 0.5)',
+  primary: '#363D80',
+  transparentPrimary: 'rgba(54, 61, 128, 0.5)',
   bright: '#E0E7EE',
   error: '#F94423',
-  background: '#f4f4f4',
-  input: '#cfcfcf'
+  background: '#f4f4f4'
 };
+
 const fontFamily = 'Roboto';
 const fontSizes = {
   xs: 4,
@@ -22,10 +25,87 @@ const spacing = {
   lg: 40,
   xl: 50
 };
+
+// COMPONENTS
+
+const buttons = {
+  button: {
+    button: {
+      margin: spacing.xs,
+      backgroundColor: colors.dark,
+      elevation: 1,
+      maxHeight: spacing.xl
+    },
+    text: {
+      color: colors.bright,
+      marginLeft: spacing.md,
+      marginRight: spacing.md,
+      marginTop: spacing.sm,
+      marginBottom: spacing.sm,
+      fontSize: fontSizes.md,
+      fontFamily: fontFamily
+
+    },
+    pressed: {
+      button: {
+        margin: spacing.xs,
+        backgroundColor: colors.bright,
+        maxHeight: spacing.xl
+      },
+      text: {
+        color: colors.dark,
+        marginLeft: spacing.md,
+        marginRight: spacing.md,
+        marginTop: spacing.sm,
+        marginBottom: spacing.sm,
+        fontSize: fontSizes.md,
+        fontFamily: fontFamily
+      }
+    }
+  },
+  pill: {
+    button: {
+      margin: spacing.xs,
+      backgroundColor: colors.dark,
+      elevation: 1,
+      maxHeight: spacing.xl,
+      borderRadius: 100
+    },
+    text: {
+      color: colors.bright,
+      marginLeft: spacing.md,
+      marginRight: spacing.md,
+      marginTop: spacing.sm,
+      marginBottom: spacing.sm,
+      fontSize: fontSizes.md,
+      fontFamily: fontFamily
+
+    },
+    pressed: {
+      button: {
+        margin: spacing.xs,
+        backgroundColor: colors.bright,
+        maxHeight: spacing.xl,
+        borderRadius: 100
+      },
+      text: {
+        color: colors.dark,
+        marginLeft: spacing.md,
+        marginRight: spacing.md,
+        marginTop: spacing.sm,
+        marginBottom: spacing.sm,
+        fontSize: fontSizes.md,
+        fontFamily: fontFamily
+      }
+    }
+  },
+}
+
 const container = {
   flex: 1,
   padding: spacing.md
 }
+
 const headers = {
   h1: {
     fontSize: fontSizes.xxl,
@@ -62,8 +142,9 @@ const headers = {
 }
 
 const navbar = {
-  height: spacing.xl,
-  backgroundColor: colors.primary
+  backgroundColor: colors.primary,
+  padding: spacing.sm,
+  maxHeight: fontSizes.xxl
 }
 
 const text = {
@@ -71,17 +152,21 @@ const text = {
 }
 
 const textInput = {
-  ...container,
-  backgroundColor: colors.input,
-  borderRadius: spacing.xs
+  backgroundColor: colors.background,
+  borderRadius: spacing.xs,
+  borderBottomColor: colors.transparentDark,
+  borderBottomWidth: 1,
 }
+
+// EXPORT
 
 export const layout = {
   colors: colors,
   fontSizes: fontSizes,
   spacing: spacing,
+  buttons: buttons,
   headers: headers,
+  navbar: navbar,
   text: text,
-  textInput: textInput,
-  navbar: navbar
+  textInput: textInput
 }

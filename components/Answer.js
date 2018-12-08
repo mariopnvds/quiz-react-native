@@ -10,7 +10,8 @@ export default class Answer extends React.Component {
       <View style={[styles.container, this.props.style]}>
         <TextInput
           style={layout.textInput}
-          onChange={(text) => {this.props.onQuestionAnswer(text)}}
+          onChangeText={(text) => {this.props.onQuestionAnswer(text)}}
+          value={this.props.userAnswer ? this.props.userAnswer : ''}
         />
       </View>
     );

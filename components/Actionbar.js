@@ -1,12 +1,14 @@
 import React from 'react';
-
 import { View, StyleSheet } from 'react-native';
 
+// Components
 import Button from './Button';
 
+// Assets
 import {layout} from '../assets/layout';
 
 export default class Actionbar extends React.Component {
+  
   render() {
     return (
       <View style={[styles.container, this.props.style]}>

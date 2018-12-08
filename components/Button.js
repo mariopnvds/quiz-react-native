@@ -1,7 +1,7 @@
 import React from 'react';
+import { TouchableWithoutFeedback, Text, View } from 'react-native';
 
-import { StyleSheet, TouchableWithoutFeedback, Text, View } from 'react-native';
-
+// Assets
 import { layout } from '../assets/layout';
 
 export default class Button extends React.Component {
@@ -10,13 +10,13 @@ export default class Button extends React.Component {
 
     this.state = {
       pressStatus: false,
-      styles: defaultStyles
+      styles: layout.buttons.button
     };
 
     if (props.type) {
       switch (props.type) {
         case 'pill':
-          this.state.styles = roundedStyles;
+          this.state.styles = layout.buttons.pill;
           break;
       }
     }
@@ -44,12 +44,12 @@ export default class Button extends React.Component {
         >
           <View
             style={(this.state.pressStatus || this.props.disabled) ?
-              this.state.styles.buttonPress : this.state.styles.button
+              this.state.styles.pressed.button : this.state.styles.button
             }
           >
             <Text
               style={(this.state.pressStatus || this.props.disabled) ?
-                this.state.styles.textPress : this.state.styles.text
+                this.state.styles.pressed.text : this.state.styles.text
               }
             >
               {this.props.text}
@@ -60,69 +60,3 @@ export default class Button extends React.Component {
     )
   }
 }
-
-const defaultStyles = StyleSheet.create({
-  text: {
-    color: layout.colors.bright,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md,
-    fontFamily: layout.fontFamily
-  },
-  textPress: {
-    color: layout.colors.dark,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md,
-    fontFamily: layout.fontFamily
-  },
-  button: {
-    margin: layout.spacing.xs,
-    backgroundColor: layout.colors.dark,
-    elevation: 1,
-    maxHeight: 48
-  },
-  buttonPress: {
-    margin: layout.spacing.xs,
-    backgroundColor: layout.colors.bright,
-    maxHeight: 48
-  }
-});
-
-const roundedStyles = StyleSheet.create({
-  text: {
-    color: layout.colors.bright,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md,
-    fontFamily: layout.fontFamily
-  },
-  textPress: {
-    color: layout.colors.dark,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md,
-    fontFamily: layout.fontFamily
-  },
-  button: {
-    margin: layout.spacing.xs,
-    backgroundColor: layout.colors.dark,
-    borderRadius: 100,
-    elevation: 1,
-    maxHeight: 48
-  },
-  buttonPress: {
-    margin: layout.spacing.xs,
-    backgroundColor: layout.colors.bright,
-    borderRadius: 100,
-    maxHeight: 48
-  }
-});
