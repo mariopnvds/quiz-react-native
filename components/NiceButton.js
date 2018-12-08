@@ -61,7 +61,7 @@ export default class NiceButton extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={this.props.style}>
         {
           // map imgs and onPress funcs
           this.props.options.map((opt, i) => {
@@ -85,17 +85,14 @@ const styles = StyleSheet.create({
   circleButton: {
     position: 'absolute',
     height: 70,
-    transform: [
-      { translateY: height - 95 },
-      { translateX: width - 100 }
-    ],
-    zIndex: 2
+    zIndex: 100
   },
   iconButton: {
     position: 'absolute',
     transform: [
-      { translateY: height - 86 },
-      { translateX: width - 100 }
+      { translateY: 9 },
+      { translateX: 0 }
     ],
+    zIndex: 99
   }
 });

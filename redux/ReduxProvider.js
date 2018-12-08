@@ -1,10 +1,15 @@
 import React from 'react';
-
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+//import { createLogger } from 'redux-logger';
+//const loggerMiddleware = createLogger();
+
+// Redux
 import GlobalState from './reducers'
 
-import Button from '../components/Button'
+// Components
+import QuizScreen from '../QuizScreen';
 
 export default class ReduxProvider extends React.Component {
   constructor(props) {
@@ -19,10 +24,7 @@ export default class ReduxProvider extends React.Component {
         didInvalidate: false,
         token: 'e2922fc0105402baef54',
         questions: []
-      },
-      timerId: 0,
-      timeLeft: 90000,
-      storageKey: '@P7_2018_IWEB:quiz'
+      }
     }
 
     this.configureStore = this.configureStore.bind(this);
@@ -30,14 +32,17 @@ export default class ReduxProvider extends React.Component {
   }
 
   render() {
-    return(
-      <Provider store={this.store}>
-        <Button text='Button'/>
-      </Provider>
-    );
+      return (
+        <Provider store={this.store}>
+          <QuizScreen/>
+        </Provider>
+      );
   }
 
   configureStore() {
-    return createStore(GlobalState, this.initialState);
+    return createStore(GlobalState, this.initialState,
+      applyMiddleware(
+        thunkMiddleware // lets us dispatch() functions
+      ));
   }
 }
