@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { StyleSheet, Dimensions, ActivityIndicator, StatusBar, Text } from 'react-native';
+import { StyleSheet, Dimensions, ActivityIndicator, StatusBar, Text, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 // Redux
@@ -33,6 +33,9 @@ let icons = [
   },
 ]
 
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+
 class QuizScreen extends React.Component {
 
   componentDidMount() {
@@ -40,7 +43,7 @@ class QuizScreen extends React.Component {
       this.props.dispatch(fetchQuestions(this.props.questions.token));
     }
   }
-  
+
   componentDidUpdate() {
     if (!this.props.questions.isFetching && this.props.questions.questions.length === 0) {
       this.props.dispatch(fetchQuestions(this.props.questions.token));
@@ -51,9 +54,9 @@ class QuizScreen extends React.Component {
     if (this.props.finished) {
       return (
         <View style={styles.container}>
-          <StatusBar backgroundColor={layout.colors.transparentPrimary} barStyle="light-content" />
+          <StatusBar style={styles.statusBar} backgroundColor={layout.colors.transparentPrimary} barStyle="light-content" />
           <View style={styles.body}>
-            <Navbar />
+            <Navbar style={styles.navbar} />
             <Text>Your score was {this.props.score}</Text>
             <Button
               text='RESET'
@@ -61,16 +64,18 @@ class QuizScreen extends React.Component {
               onPress={() => { this.props.dispatch(restart(this.props.questions.token)) }}
             />
           </View>
-          <NiceButton options={icons} style={styles.niceButton} direction='up' />
+          <NiceButton options={icons} style={styles.niceButton} direction='down' />
         </View>
       )
     } else {
       if (this.props.questions.questions.length > 0 && !this.props.questions.isFetching) {
         return (
           <View style={styles.container}>
-            <StatusBar backgroundColor={layout.colors.transparentPrimary} barStyle="light-content" />
+            <View style={styles.statusBar}>
+              <StatusBar backgroundColor={layout.colors.transparentPrimary} barStyle="light-content" />
+            </View>
             <View style={styles.body}>
-              <Navbar />
+              <Navbar style={styles.navbar} />
               <Game
                 question={this.props.questions.questions[this.props.currentQuestion]}
                 currentQuestion={this.props.currentQuestion}
@@ -85,7 +90,7 @@ class QuizScreen extends React.Component {
                 }}
               />
             </View>
-            <NiceButton options={icons} style={styles.niceButton} direction='up' />
+            <NiceButton options={icons} style={styles.niceButton} direction='down' />
           </View>
         );
       }
@@ -115,8 +120,16 @@ const styles = StyleSheet.create({
   },
   niceButton: {
     position: 'absolute',
-    top: height - 115,
-    left: width - 85
+    top: 30 + STATUSBAR_HEIGHT,
+    right: 10,
+    zIndex: 1
+  },
+  statusBar: {
+    height: STATUSBAR_HEIGHT,
+    backgroundColor: layout.colors.transparentPrimary
+  },
+  navbar: {
+    height: APPBAR_HEIGHT
   }
 });
 

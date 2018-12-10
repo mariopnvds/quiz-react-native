@@ -68,7 +68,7 @@ const defaultStyles = StyleSheet.create({
     fontSize: layout.fontSizes.md
   },
   button: {
-    borderWidth: layout.spacing.xs,
+    borderWidth: 0,
     borderColor: layout.colors.background,
     backgroundColor: layout.colors.dark,
     elevation: 1,
@@ -80,7 +80,7 @@ const defaultStyles = StyleSheet.create({
     borderRadius: 100
   },
   buttonPress: {
-    borderWidth: layout.spacing.xs,
+    borderWidth: 0,
     borderColor: layout.colors.dark,
     backgroundColor: layout.colors.bright,
     maxHeight: 70,

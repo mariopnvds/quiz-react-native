@@ -81,7 +81,7 @@ export default class NiceButton extends React.Component {
     switch (this.state.direction) {
       case 'up':
         return [
-          { top: this.state[i] }, 
+          { top: this.state[i] },
           styles.iconButton,
           {
             transform: [
@@ -90,20 +90,20 @@ export default class NiceButton extends React.Component {
             ]
           }]
       case 'down':
-      spacing = spacing * (-1);
+      spacing = 55;
         return [
-          { top: this.state[i] }, 
+          { top: this.state[i] },
           styles.iconButton,
           {
             transform: [
-              { translateY: 20 },
-              { translateX: 10 }
+              { translateY: 15 },
+              { translateX: 5 }
             ]
           }]
       case 'right':
-      spacing = spacing * (-1);
+      spacing = 55;
         return [
-          { left: this.state[i] }, 
+          { left: this.state[i] },
           styles.iconButton,
           {
             transform: [
@@ -113,7 +113,7 @@ export default class NiceButton extends React.Component {
           }]
       default:
         return [
-          { left: this.state[i] }, 
+          { left: this.state[i] },
           styles.iconButton,
           {
             transform: [
@@ -129,7 +129,7 @@ export default class NiceButton extends React.Component {
     return (
       <View style={this.props.style}>
         {
-          // map imgs and onPress funcs
+          // map imgs and onPress funcs to each IconButton
           this.props.options.map((opt, i) => {
             return (<IconButton
               image={opt.image}
@@ -148,11 +148,20 @@ export default class NiceButton extends React.Component {
 const styles = StyleSheet.create({
   circleButton: {
     position: 'absolute',
-    height: 70,
-    zIndex: 100
+    height: 60,
+    width: 60,
+    zIndex: 100,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2
   },
   iconButton: {
     position: 'absolute',
-    zIndex: 99
+    zIndex: 99,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2
   }
 });

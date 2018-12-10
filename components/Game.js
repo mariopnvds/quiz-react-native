@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   content: {
-    flexGrow: 5
+    flexGrow: 6
   },
   actionbar: {
     flexGrow: 1,

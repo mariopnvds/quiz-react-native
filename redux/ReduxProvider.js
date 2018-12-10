@@ -2,12 +2,25 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 // Redux
 import GlobalState from './reducers'
 
 // Components
 import QuizScreen from '../QuizScreen';
+
+/*const AppNavigator = createStackNavigator({
+  Index: {
+    screen: IndexScreen
+  },
+  Quizzes: {
+    screen: QuizScreen
+  }
+}, {
+  initialRouteName: 'Index',
+  headerMode: 'none'
+});*/
 
 export default class ReduxProvider extends React.Component {
   constructor(props) {
@@ -30,11 +43,11 @@ export default class ReduxProvider extends React.Component {
   }
 
   render() {
-      return (
-        <Provider store={this.store}>
-          <QuizScreen/>
-        </Provider>
-      );
+    return (
+      <Provider store={this.store}>
+        <QuizScreen />
+      </Provider>
+    );
   }
 
   configureStore() {

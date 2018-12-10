@@ -9,7 +9,6 @@ const colors = {
   background: '#f4f4f4'
 };
 
-const fontFamily = 'Roboto';
 const fontSizes = {
   xs: 4,
   sm: 8,
@@ -42,8 +41,7 @@ const buttons = {
       marginRight: spacing.md,
       marginTop: spacing.sm,
       marginBottom: spacing.sm,
-      fontSize: fontSizes.md,
-      fontFamily: fontFamily
+      fontSize: fontSizes.md
 
     },
     pressed: {
@@ -58,8 +56,7 @@ const buttons = {
         marginRight: spacing.md,
         marginTop: spacing.sm,
         marginBottom: spacing.sm,
-        fontSize: fontSizes.md,
-        fontFamily: fontFamily
+        fontSize: fontSizes.md
       }
     }
   },
@@ -77,9 +74,7 @@ const buttons = {
       marginRight: spacing.md,
       marginTop: spacing.sm,
       marginBottom: spacing.sm,
-      fontSize: fontSizes.md,
-      fontFamily: fontFamily
-
+      fontSize: fontSizes.md
     },
     pressed: {
       button: {
@@ -94,8 +89,7 @@ const buttons = {
         marginRight: spacing.md,
         marginTop: spacing.sm,
         marginBottom: spacing.sm,
-        fontSize: fontSizes.md,
-        fontFamily: fontFamily
+        fontSize: fontSizes.md
       }
     }
   },
@@ -110,33 +104,21 @@ const headers = {
   h1: {
     fontSize: fontSizes.xxl,
     fontWeight: 'bold',
-    marginTop: spacing.xl,
-    marginBottom: spacing.xl,
-    fontFamily: fontFamily,
     color: colors.primary
   },
   h2: {
     fontSize: fontSizes.xl,
     fontWeight: 'bold',
-    marginTop: spacing.lg,
-    marginBottom: spacing.lg,
-    fontFamily: fontFamily,
     color: colors.primary
   },
   h3: {
     fontSize: fontSizes.lg,
     fontWeight: 'bold',
-    marginTop: spacing.md,
-    marginBottom: spacing.md,
-    fontFamily: fontFamily,
     color: colors.primary
   },
   h4: {
     fontSize: fontSizes.md,
     fontWeight: 'bold',
-    marginTop: spacing.sm,
-    marginBottom: spacing.sm,
-    fontFamily: fontFamily,
     color: colors.primary
   }
 }
@@ -148,7 +130,7 @@ const navbar = {
 }
 
 const text = {
-  fontFamily: fontFamily
+  
 }
 
 const textInput = {
