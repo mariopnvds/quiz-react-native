@@ -3,29 +3,9 @@ import { View, StyleSheet } from 'react-native';
 
 // Components
 import Button from './Button';
-import NiceButton from './NiceButton';
 
 // Assets
 import {layout} from '../assets/layout';
-
-const loadIcon = require('../assets/load.png');
-const saveIcon = require('../assets/save.png');
-const removeIcon = require('../assets/remove.png');
-
-let icons = [
-  {
-    image: removeIcon,
-    onPress: () => { alert('r') } // To be changed by corresponding action
-  },
-  {
-    image: loadIcon,
-    onPress: () => { alert('l') } // To be changed by corresponding action
-  },
-  {
-    image: saveIcon,
-    onPress: () => { alert('s') } // To be changed by corresponding action
-  },
-]
 
 export default class Actionbar extends React.Component {
   

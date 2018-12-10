@@ -1,14 +1,19 @@
 import React from 'react';
+import { View, LayoutAnimation, NativeModules } from 'react-native';
 
-import { View, LayoutAnimation, NativeModules, StyleSheet } from 'react-native';
-
+// Components
 import CircleButton from './CircleButton';
 import IconButton from './IconButton';
 
+// Assets
+import { layout } from '../assets/layout';
+
+// Enable animations
 const { UIManager } = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
+// show/hide animation
 let CustomAnimation = {
   duration: 500,
   create: {
@@ -22,20 +27,22 @@ let CustomAnimation = {
   }
 };
 
-let spacing = -55;
+let spacing = -55; // Spacing between iconButtons
 
 export default class NiceButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pressed: false,
-      direction: ''
+      direction: '',
+      radius: 32 // Pair number pls
     }
 
     this._onPress = this._onPress.bind(this);
     this._setStyle = this._setStyle.bind(this);
   }
 
+  // indicate on self state what is the direction (yes, this could be bypassed)
   componentDidMount() {
     if (this.props.direction) {
       switch (this.props.direction) {
@@ -77,57 +84,39 @@ export default class NiceButton extends React.Component {
     }
   }
 
+  // Huge hedeache here
   _setStyle(i) {
     switch (this.state.direction) {
       case 'up':
         return [
-          { top: this.state[i] },
-          styles.iconButton,
-          {
-            transform: [
-              { translateY: 0 },
-              { translateX: 10 }
-            ]
-          }]
+          { top: this.state[i] || 5 },  // Magic number. Yea, I don't like it either
+          layout.niceButton.iconButton] 
       case 'down':
-      spacing = 55;
         return [
-          { top: this.state[i] },
-          styles.iconButton,
-          {
-            transform: [
-              { translateY: 15 },
-              { translateX: 5 }
-            ]
-          }]
+          { top: ((2 * this.state.radius - layout.iconButton.button.height) - (this.state[i] || 5)) },
+          layout.niceButton.iconButton]
       case 'right':
-      spacing = 55;
         return [
-          { left: this.state[i] },
-          styles.iconButton,
           {
-            transform: [
-              { translateY: 10 },
-              { translateX: 20 }
-            ]
-          }]
+            left: - (layout.iconButton.button.width - this.state.radius) - this.state[i],
+            top: (this.state.radius - layout.iconButton.button.height / 2) + 5
+          },
+          layout.niceButton.iconButton]
       default:
         return [
-          { left: this.state[i] },
-          styles.iconButton,
           {
-            transform: [
-              { translateY: 10 },
-              { translateX: 0 }
-            ]
-          }]
+            left: - this.state.radius + this.state[i],
+            top: (this.state.radius - layout.iconButton.button.height / 2) + 5
+          },
+          layout.niceButton.iconButton
+        ]
     }
   }
 
   render() {
 
     return (
-      <View style={this.props.style}>
+      <View style={[layout.niceButton.view, this.props.style]}>
         {
           // map imgs and onPress funcs to each IconButton
           this.props.options.map((opt, i) => {
@@ -138,30 +127,13 @@ export default class NiceButton extends React.Component {
               key={i} />)
           })
         }
-        <CircleButton style={styles.circleButton} onPress={this._onPress} />
+        <CircleButton
+          content={this.props.content}
+          style={layout.niceButton.circleButton}
+          onPress={this._onPress}
+          radius={this.state.radius}
+        />
       </View>
     );
   }
 }
-
-// gotta check out this damn thing
-const styles = StyleSheet.create({
-  circleButton: {
-    position: 'absolute',
-    height: 60,
-    width: 60,
-    zIndex: 100,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2
-  },
-  iconButton: {
-    position: 'absolute',
-    zIndex: 99,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2
-  }
-});

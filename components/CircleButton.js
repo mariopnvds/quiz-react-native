@@ -4,13 +4,12 @@ import { StyleSheet, TouchableWithoutFeedback, Text, View } from 'react-native';
 
 import { layout } from '../assets/layout';
 
-export default class Button extends React.Component {
+export default class CircleButton extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pressStatus: false,
-      styles: defaultStyles
+      pressStatus: false
     };
 
     this._onHideUnderlay = this._onHideUnderlay.bind(this);
@@ -26,68 +25,43 @@ export default class Button extends React.Component {
   }
 
   render() {
-    return (
-      <TouchableWithoutFeedback
-        onPress={this.props.onPress}
-        onPressIn={this._onShowUnderlay}
-        onPressOut={this._onHideUnderlay}
-      >
-        <View
-          style={[this.state.pressStatus ?
-            this.state.styles.buttonPress : this.state.styles.button
-          , this.props.style]}
-        >
-          <Text
-            style={[this.state.pressStatus ?
-              this.state.styles.textPress : this.state.styles.text
-            ]}
+    switch (this.props.content.type) {
+      case 'text':
+      default:
+        return (
+          <TouchableWithoutFeedback
+            onPress={this.props.onPress}
+            onPressIn={this._onShowUnderlay}
+            onPressOut={this._onHideUnderlay}
+            style={this.props.style}
           >
-            +
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
-    )
+            <View
+              style={[this.state.pressStatus ?
+                [layout.buttons.button.pressed.button, {
+                  width: 2 * this.props.radius,
+                  height: 2 * this.props.radius,
+                  maxWidth: 2 * this.props.radius,
+                  maxHeight: 2 * this.props.radius,
+                  borderRadius: this.props.radius
+                }] : [layout.buttons.button.button, {
+                  width: 2 * this.props.radius,
+                  height: 2 * this.props.radius,
+                  maxWidth: 2 * this.props.radius,
+                  maxHeight: 2 * this.props.radius,
+                  borderRadius: this.props.radius
+                }]
+                , this.props.style]}
+            >
+              <Text
+                style={[this.state.pressStatus ?
+                  layout.buttons.button.pressed.text : layout.buttons.button.text
+                ]}
+              >
+                +
+            </Text>
+            </View>
+          </TouchableWithoutFeedback>
+        )
+    }
   }
 }
-
-const defaultStyles = StyleSheet.create({
-  text: {
-    color: layout.colors.bright,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md
-  },
-  textPress: {
-    color: layout.colors.dark,
-    marginLeft: layout.spacing.md,
-    marginRight: layout.spacing.md,
-    marginTop: layout.spacing.sm,
-    marginBottom: layout.spacing.sm,
-    fontSize: layout.fontSizes.md
-  },
-  button: {
-    borderWidth: 0,
-    borderColor: layout.colors.background,
-    backgroundColor: layout.colors.dark,
-    elevation: 1,
-    maxHeight: 70,
-    width: 70,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100
-  },
-  buttonPress: {
-    borderWidth: 0,
-    borderColor: layout.colors.dark,
-    backgroundColor: layout.colors.bright,
-    maxHeight: 70,
-    width: 70,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100
-  }
-});

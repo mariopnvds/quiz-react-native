@@ -35,7 +35,6 @@ export default class Button extends React.Component {
 
   render() {
     return (
-      <View>
         <TouchableWithoutFeedback
           onPress={this.props.disabled ? undefined : this.props.onPress}
           onPressIn={this._onShowUnderlay}
@@ -56,7 +55,6 @@ export default class Button extends React.Component {
             </Text>
           </View>
         </TouchableWithoutFeedback>
-      </View>
     )
   }
 }

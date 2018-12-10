@@ -9,6 +9,31 @@ const colors = {
   background: '#f4f4f4'
 };
 
+const elevations = [  // NOTICE THAT 0 ELEVATION MEANS NO ELEVATION
+  {},
+  {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1
+  },
+  {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2
+  },
+  {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 3
+  }
+]
+
 const fontSizes = {
   xs: 4,
   sm: 8,
@@ -17,6 +42,7 @@ const fontSizes = {
   xl: 48,
   xxl: 64
 }
+
 const spacing = {
   xs: 5,
   sm: 10,
@@ -32,8 +58,9 @@ const buttons = {
     button: {
       margin: spacing.xs,
       backgroundColor: colors.dark,
-      elevation: 1,
-      maxHeight: spacing.xl
+      ...elevations[1],
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     text: {
       color: colors.bright,
@@ -48,7 +75,8 @@ const buttons = {
       button: {
         margin: spacing.xs,
         backgroundColor: colors.bright,
-        maxHeight: spacing.xl
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       text: {
         color: colors.dark,
@@ -64,9 +92,10 @@ const buttons = {
     button: {
       margin: spacing.xs,
       backgroundColor: colors.dark,
-      elevation: 1,
-      maxHeight: spacing.xl,
-      borderRadius: 100
+      ...elevations[1],
+      borderRadius: 100,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     text: {
       color: colors.bright,
@@ -80,8 +109,9 @@ const buttons = {
       button: {
         margin: spacing.xs,
         backgroundColor: colors.bright,
-        maxHeight: spacing.xl,
-        borderRadius: 100
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       text: {
         color: colors.dark,
@@ -123,10 +153,48 @@ const headers = {
   }
 }
 
+const iconButton = {
+  img : {
+    tintColor: colors.dark,
+    height: 30,
+    width: 30,
+  },
+  button: {
+    backgroundColor: colors.background,
+    height: 40,
+    width: 40,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+    padding: spacing.xs
+  }
+}
+
 const navbar = {
   backgroundColor: colors.primary,
   padding: spacing.sm,
-  maxHeight: fontSizes.xxl
+  maxHeight: 56,
+  flex: 1,
+  justifyContent: 'center'
+}
+
+const niceButton = {
+  view: {
+    position: 'absolute',
+    alignItems: 'center'
+  },
+  circleButton: {
+    position: 'absolute',
+    zIndex: 100,
+    ...elevations[2],
+    backgroundColor: colors.dark
+  },
+  iconButton: {
+    position: 'absolute',
+    zIndex: 99,
+    ...elevations[1]
+  }
 }
 
 const text = {
@@ -144,11 +212,14 @@ const textInput = {
 
 export const layout = {
   colors: colors,
+  elevations: elevations,
   fontSizes: fontSizes,
   spacing: spacing,
   buttons: buttons,
   headers: headers,
+  iconButton: iconButton,
   navbar: navbar,
+  niceButton: niceButton,
   text: text,
   textInput: textInput
 }
