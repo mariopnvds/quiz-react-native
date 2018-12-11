@@ -43,7 +43,7 @@ export default class Card extends React.Component {
           </Text>
         </View>
         <View style={styles.bottom}>
-          <Button text='Ver Perfil' />
+          <Button text='Ver Perfil' onPress={this.props.onPress} />
         </View>
       </View>
     )

@@ -4,6 +4,7 @@ import ReduxProvider from './redux/ReduxProvider';
 import { createStackNavigator } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
 import { createAppContainer } from 'react-navigation';
+import WebScreen from './screens/WebScreen';
 
 const AppNavigator = createStackNavigator({
   Index: {
@@ -11,6 +12,9 @@ const AppNavigator = createStackNavigator({
   },
   Quiz: {
     screen: ReduxProvider
+  },
+  Web: {
+    screen: WebScreen
   }
 }, {
   headerMode: 'none'

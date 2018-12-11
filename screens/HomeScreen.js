@@ -23,8 +23,13 @@ export default class HomeScreen extends React.Component {
           <Card 
             img='https://media.licdn.com/dms/image/C5603AQGIO6KFdi7zBA/profile-displayphoto-shrink_200_200/0?e=1550102400&v=beta&t=kuhcB1A_UEYG4Wb_ZU6DRScCt6svDf0P32kMrAAcyUE'
             description='Pablo Caraballo Llorente, Telecom. Engineering Student @ ETSIT, UPM'
+            onPress={() => navigate('Web', {href: 'https://github.com/Paleloser'})}
             />
-          <Card />
+          <Card 
+            img='https://media.licdn.com/dms/image/C5603AQF6coDBBF-Ifg/profile-displayphoto-shrink_800_800/0?e=1550102400&v=beta&t=X1X25v_EivVjZPrKfD6MWagyHBxIHYXntN_VZ7fLt9k'
+            description='Mario Penavades Suárez, Telecom. Engineering Student @ ETSIT, UPM'
+            onPress={() => navigate('Web', {href: 'https://github.com/mariopnvds'})}
+            />
           <Button
             text='Empezar.'
             onPress={() => navigate('Quiz')}

@@ -54,6 +54,7 @@ class QuizScreen extends React.Component {
     if (this.props.finished) {
       return (
         <View style={styles.container}>
+          <NiceButton content={{ type: 'text', payload: '+' }} options={icons} style={styles.niceButton} direction='down' />
           <Sbar />
           <View style={styles.body}>
             <Navbar />
@@ -64,13 +65,13 @@ class QuizScreen extends React.Component {
               onPress={() => { this.props.dispatch(restart(this.props.questions.token)) }}
             />
           </View>
-          <NiceButton content={{type: 'text', payload: '+'}} options={icons} style={styles.niceButton} direction='down' />
         </View>
       )
     } else {
       if (this.props.questions.questions.length > 0 && !this.props.questions.isFetching) {
         return (
           <View style={styles.container}>
+            <NiceButton content={{ type: 'text', payload: '+' }} options={icons} style={styles.niceButton} direction='down' />
             <Sbar />
             <Navbar />
             <View style={styles.body}>
@@ -88,13 +89,12 @@ class QuizScreen extends React.Component {
                 }}
               />
             </View>
-            <NiceButton content={{type: 'text', payload: '+'}} options={icons} style={styles.niceButton} direction='down' />
           </View>
         );
       }
       return (
-        <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-          <ActivityIndicator size="large" color={layout.colors.dark} style={{transform: [{translateY: height/2}]}} />
+        <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+          <ActivityIndicator size="large" color={layout.colors.dark} style={{ transform: [{ translateY: height / 2 }] }} />
         </View>
       )
     }
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: layout.colors.background,
     height: height,
-    zIndex: 1,
-    flex: 1
+    flex: 1,
+    zIndex: 0
   },
   niceButton: {
     top: 20 + STATUSBAR_HEIGHT,
