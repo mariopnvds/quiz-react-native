@@ -26,6 +26,7 @@ export default class CircleButton extends React.Component {
 
   render() {
     switch (this.props.content.type) {
+      case 'image': // TODO
       case 'text':
       default:
         return (

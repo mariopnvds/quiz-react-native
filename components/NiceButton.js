@@ -35,7 +35,7 @@ export default class NiceButton extends React.Component {
     this.state = {
       pressed: false,
       direction: '',
-      radius: 32 // Pair number pls
+      radius: 30 // Pair number pls
     }
 
     this._onPress = this._onPress.bind(this);
@@ -114,7 +114,6 @@ export default class NiceButton extends React.Component {
   }
 
   render() {
-
     return (
       <View style={[layout.niceButton.view, this.props.style]}>
         {

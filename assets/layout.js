@@ -1,4 +1,4 @@
-// GLOBAL VALUES
+// GLOBAL VARIABLES
 const colors = {
   dark: '#15161C',
   transparentDark: 'rgba(21, 22, 28, 0.5)',
@@ -208,7 +208,7 @@ const textInput = {
   borderBottomWidth: 1,
 }
 
-// EXPORT
+// GLOBAL EXPORT
 
 export const layout = {
   colors: colors,

@@ -4,20 +4,20 @@ import { StyleSheet, Dimensions, ActivityIndicator, Text, Platform } from 'react
 import { connect } from 'react-redux';
 
 // Redux
-import { questionAnswer, submit, fetchQuestions, changeQuestion, restart } from './redux/actions';
+import { questionAnswer, submit, fetchQuestions, changeQuestion, restart } from '../redux/actions';
 
 // Components
-import Navbar from './components/Navbar';
-import Game from './components/Game';
-import NiceButton from './components/NiceButton';
-import Button from './components/Button';
-import Sbar from './components/Sbar';
+import Navbar from '../components/Navbar';
+import Game from '../components/Game';
+import NiceButton from '../components/NiceButton';
+import Button from '../components/Button';
+import Sbar from '../components/Sbar';
 
 // Assets
-import { layout } from './assets/layout';
-const loadIcon = require('./assets/load.png');
-const saveIcon = require('./assets/save.png');
-const removeIcon = require('./assets/remove.png');
+import { layout } from '../assets/layout';
+const loadIcon = require('../assets/load.png');
+const saveIcon = require('../assets/save.png');
+const removeIcon = require('../assets/remove.png');
 
 let icons = [
   {
@@ -93,8 +93,8 @@ class QuizScreen extends React.Component {
         );
       }
       return (
-        <View>
-          <ActivityIndicator size="large" color={layout.colors.dark} />
+        <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+          <ActivityIndicator size="large" color={layout.colors.dark} style={{transform: [{translateY: height/2}]}} />
         </View>
       )
     }
