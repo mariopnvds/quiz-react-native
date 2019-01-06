@@ -4,7 +4,15 @@ import { StyleSheet, Dimensions, ActivityIndicator, Text, Platform } from 'react
 import { connect } from 'react-redux';
 
 // Redux
-import { questionAnswer, submit, fetchQuestions, changeQuestion, restart } from '../redux/actions';
+import {
+  questionAnswer,
+  submit,
+  fetchQuestions,
+  changeQuestion,
+  restart,
+  initQuestions,
+  receiveQuestions
+} from '../redux/actions';
 
 // Components
 import Navbar from '../components/Navbar';
@@ -76,6 +84,8 @@ class QuizScreen extends React.Component {
             <Navbar />
             <View style={styles.body}>
               <Game
+                questions={this.props.questions.questions}
+                token={this.props.questions.token}
                 question={this.props.questions.questions[this.props.currentQuestion]}
                 currentQuestion={this.props.currentQuestion}
                 onQuestionAnswer={(answer) => {
@@ -86,6 +96,15 @@ class QuizScreen extends React.Component {
                 }}
                 onSubmit={() => {
                   this.props.dispatch(submit(this.props.questions.questions));
+                }}
+                onRestart={() => {
+                  this.props.dispatch(restart(this.props.questions.token));
+                }}
+                onInit={() => {
+                  this.props.dispatch(initQuestions(this.props.questions.token));
+                }}
+                onReceive={(quests) => {
+                  this.props.dispatch(receiveQuestions(this.props.questions.token, quests));
                 }}
               />
             </View>

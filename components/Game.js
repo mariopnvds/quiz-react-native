@@ -19,9 +19,13 @@ export default class Game extends React.Component {
           onQuestionAnswer={this.props.onQuestionAnswer}
         />
         <Actionbar
+          questions={this.props.questions}
           style={styles.actionbar}
           onChangeQuestion={this.props.onChangeQuestion}
           onSubmit={this.props.onSubmit}
+          onInit={this.props.onInit}
+          onReceive={this.props.onReceive}
+          onRestart={this.props.onRestart}
           currentQuestion={this.props.currentQuestion}
         />
       </View>

@@ -1,34 +1,93 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 
 // Components
 import Button from './Button';
 
 // Assets
 import {layout} from '../assets/layout';
+import {initQuestions, receiveQuestions, restart} from "../redux/actions";
 
 export default class Actionbar extends React.Component {
-  
+  constructor(props) {
+        super(props);
+        this.saveData = this.saveData.bind(this);
+        this.deleteData = this.deleteData.bind(this);
+        this.loadData = this.loadData.bind(this);
+    }
+  async saveData(){
+      try {
+          AsyncStorage.setItem('@P7_2018_IWEB:quiz', JSON.stringify(this.props.questions));
+          alert('Data successfully saved')
+      } catch (e) {
+          alert('There was a problem saving data')
+      }
+  };
+  async loadData(){
+      try{
+          let quests = await AsyncStorage.getItem('@P7_2018_IWEB:quiz');
+          if(quests === null){
+              alert('Empty data')
+          } else {
+              let parsed = JSON.parse(quests);
+              alert("dentro");
+              this.props.onReceive(parsed);
+              alert('Data successfully loaded')
+          }
+      } catch (e) {
+          //alert('There was a problem loading data');}
+          alert(e.message);
+      }
+  };
+  async deleteData(){
+      try {
+          await AsyncStorage.removeItem('@P7_2018_IWEB:quiz');
+          alert("Data successfully deleted")
+      } catch (e) {
+          alert('There was a problem deleting data');
+      }
+  };
   render() {
     return (
-      <View style={[styles.container, this.props.style]}>
-        <Button
-          text='Submit'
-          type='pill'
-          onPress={() => {this.props.onSubmit()}}
-        />
-        <Button
-          text='Previous'
-          type='pill'
-          onPress={() => {this.props.onChangeQuestion('PREV')}}
-          disabled={this.props.currentQuestion === 0 ? true : false}
-        />
-        <Button
-          text='Next'
-          type='pill'
-          onPress={() => {this.props.onChangeQuestion('NEXT')}}
-          disabled={this.props.currentQuestion === 9 ? true : false}
-        />
+      <View>
+          <View style={[styles.container, this.props.style]}>
+            <Button
+              text='Submit'
+              type='pill'
+              onPress={() => {this.props.onSubmit()}}
+            />
+            <Button
+              text='Previous'
+              type='pill'
+              onPress={() => {this.props.onChangeQuestion('PREV')}}
+              disabled={this.props.currentQuestion === 0 ? true : false}
+            />
+            <Button
+              text='Next'
+              type='pill'
+              onPress={() => {this.props.onChangeQuestion('NEXT')}}
+              disabled={this.props.currentQuestion === 9 ? true : false}
+            />
+          </View>
+          <View style={[styles.container, this.props.style]}>
+            <Button
+              text='Save'
+              type='pill'
+              onPress={this.saveData}
+              />
+            <Button
+              text='Load'
+              type='pill'
+              onPress={this.loadData}
+              onRestart={() => {this.props.onRestart()}}
+              onInit={() => {this.props.onInit()}}
+            />
+            <Button
+              text='Delete'
+              type='pill'
+              onPress={this.deleteData}
+            />
+          </View>
       </View>
     );
   }
@@ -39,6 +98,6 @@ const styles = StyleSheet.create({
     padding: layout.spacing.md,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   }
 });

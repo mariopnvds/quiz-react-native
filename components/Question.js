@@ -9,7 +9,7 @@ export default class Question extends React.Component {
     return (
       <View style={[styles.container, this.props.style]}>
         <Text style={[layout.headers.h2, styles.title]}>
-          Question {this.props.currentQuestion}
+          Question {this.props.currentQuestion+1}
         </Text>
         <Text style={layout.text}>
           {this.props.question}
