@@ -6,7 +6,6 @@ import Button from './Button';
 
 // Assets
 import {layout} from '../assets/layout';
-import {initQuestions, receiveQuestions, restart} from "../redux/actions";
 
 export default class Actionbar extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ export default class Actionbar extends React.Component {
               alert('Empty data')
           } else {
               let parsed = JSON.parse(quests);
-              alert("dentro");
+              this.props.onInit()
               this.props.onReceive(parsed);
               alert('Data successfully loaded')
           }
@@ -73,19 +72,17 @@ export default class Actionbar extends React.Component {
             <Button
               text='Save'
               type='pill'
-              onPress={this.saveData}
+              onPress={() => {this.saveData()}}
               />
             <Button
               text='Load'
               type='pill'
-              onPress={this.loadData}
-              onRestart={() => {this.props.onRestart()}}
-              onInit={() => {this.props.onInit()}}
+              onPress={() => {this.loadData()}}
             />
             <Button
               text='Delete'
               type='pill'
-              onPress={this.deleteData}
+              onPress={() => {this.deleteData()}}
             />
           </View>
       </View>

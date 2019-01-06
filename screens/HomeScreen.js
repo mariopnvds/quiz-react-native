@@ -44,7 +44,7 @@ let { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    height: height,
+    height: height - 40,
     width: width,
     backgroundColor: layout.colors.background,
     flexDirection: 'column',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: layout.colors.background,
-    height: height,
+    height: height + 100,
     zIndex: 1,
     flex: 1
   }

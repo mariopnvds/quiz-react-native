@@ -17,7 +17,6 @@ import {
 // Components
 import Navbar from '../components/Navbar';
 import Game from '../components/Game';
-import NiceButton from '../components/NiceButton';
 import Button from '../components/Button';
 import Sbar from '../components/Sbar';
 
@@ -62,7 +61,6 @@ class QuizScreen extends React.Component {
     if (this.props.finished) {
       return (
         <View style={styles.container}>
-          <NiceButton content={{ type: 'text', payload: '+' }} options={icons} style={styles.niceButton} direction='down' />
           <Sbar />
           <View style={styles.body}>
             <Navbar />
@@ -79,7 +77,6 @@ class QuizScreen extends React.Component {
       if (this.props.questions.questions.length > 0 && !this.props.questions.isFetching) {
         return (
           <View style={styles.container}>
-            <NiceButton content={{ type: 'text', payload: '+' }} options={icons} style={styles.niceButton} direction='down' />
             <Sbar />
             <Navbar />
             <View style={styles.body}>
